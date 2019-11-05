@@ -1,0 +1,168 @@
+﻿@model List<PetAccessoriesOnlineShop.Models.CartItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section jsFooter{
+    <script src="~/Assets/Client/js/controller/cartController.js"></script>
+}
+
+@{
+    var sessionCheckout = (UserCustomerLogin)Session[PetAccessoriesOnlineShop.Common.CommonConstants.USER_SESSION];
+}
+
+<div class="wrapper-shopping-cart">
+    <div class="image-advertises">
+        <img class="img-responsive back_ct_img" width="100%" alt=""
+             src="https://demo.fieldthemes.com/ps-mina/home1/modules/fieldthemecustomizer/views/img/front/bg/banner_breadcrumb-1.jpg">
+    </div>
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-9 ">
+                <div class="product-cart">
+                    <div class="row">
+                        <div class="col">
+                            <div class="title-shopping-cart">
+                                shopping cart
+                            </div>
+                            <span></span>
+                        </div>
+                    </div>
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="row product product-1">
+                                <!-- line -->
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+
+                                <div class="col">
+                                    <div class="product-image">
+                                        <img src="@item.Product.Image" alt="" width="100%">
+                                    </div>
+                                </div>
+
+                                <div class="col-4 ">
+                                    <div class="product-detail-cart">
+                                        <div>
+                                            <div class="product-star-cart">
+
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                                <i class="far fa-star"></i>
+
+                                            </div>
+                                            <div class="product-name-cart">@item.Product.Name</div>
+                                            <div class="product-price-cart">$ <span id="price">@(item.Product.Price.GetValueOrDefault(0).ToString("N0"))</span></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="quantity">
+                                        <div class="input-group">
+                                            <input type="text" @*id="input-numberr"*@ class="txt-quantity" data-id="@item.Product.ID" value="@item.Quantity">
+                                            <div class="button">
+                                                <button class="btn-add">+</button>
+                                                <button class="btn-sub">-</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="product-price-sum">$ @((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) <span id="total-price">  </span> </div>
+                                </div>
+                                <div class="col-1">
+                                    <div class="icon-delete" @*id="icon-delete-1"*@ data-id="@item.Product.ID">
+                                        <i class="fas fa-trash "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="row product product-1 mb-0">
+                            <!-- line -->
+                            <div class="col-12">
+                                <hr>
+                            </div>
+                            <div class="col-12 mt-0 mb-4">
+                                <div class=" alert alert-danger mb-4">Cart empty!</div>
+                            </div>
+
+                        </div>
+                    }
+
+
+                    <!-- start-1-product -->
+                </div>
+                <!--end product-cart -->
+                <button id="btn-continue" class="btn btn-dark">Continue buy product</button>
+                <button id="btn-update" class="btn btn-success">Update cart</button>
+                <button id="btn-deletel-all" class="btn btn-danger">Delete all cart</button>
+            </div>
+            <div class="col-3">
+                <div class="product-cart">
+                    <div class="row">
+                        <div class="col">
+                            <div class="title-bill">
+                                BILL
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row product-cart-items">
+                        <div class="col"><span class="float-left">Items</span></div>
+                        <div class="col "><span class="float-right">@(Model.Sum(x => x.Quantity).ToString("N0"))</  span></div>
+                    </div>
+                    <div class="row product-cart-promo-code">
+                        <div class="col float-left"><span class="float-left">Subtotal</span></div>
+                        <div class="col"><span class="float-right">$ @(Model.Sum(x => x.Product.Price * x.Quantity).Value.ToString("N0"))</span></div>
+                    </div>
+                    @*<div class="row product-cart-promo-code">
+                            <div class="col float-left"><span class="float-left">Promo code</span></div>
+                            <div class="col"><span class="float-right">12.0%</span></div>
+                        </div>*@
+                    <div class="row product-cart-shipping">
+                        <div class="col float-left"><span class="float-left">Shipping</span></div>
+                        <div class="col"><span class="float-right">$ 70</span></div>
+                    </div>
+                    <hr>
+                    <div class="row product-cart-total">
+                        <div class="col float-left total">Total</div>
+                        <div class="col"><span class="float-right price">$ @((Model.Sum(x => x.Product.Price * x.Quantity) + 70).Value.ToString("N0"))</span></div>
+                    </div>
+                    <hr>
+                    <div class="row product-cart-checkout">
+                        <div class="col">
+                            @if (sessionCheckout == null)
+                            {
+                                <a href="/login"><button class="btn btn-dark " id="btn-checkout">CHECKOUT</button></a>
+                            }
+                            else
+                            {
+                                <button class="btn btn-dark " id="btn-checkout">CHECKOUT</button>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

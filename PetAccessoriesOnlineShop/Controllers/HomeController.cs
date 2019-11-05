@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Model.DAO;
+using PetAccessoriesOnlineShop.Common;
+using PetAccessoriesOnlineShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +11,42 @@ namespace PetAccessoriesOnlineShop.Controllers
 {
     public class HomeController : Controller
     {
+        // GET: Home
         public ActionResult Index()
         {
+            var productDao = new ProductDao();
+            ViewBag.ListNewProductFood = productDao.ListNewProduct(4,1);
+            ViewBag.ListNewProductFoodContainers = productDao.ListNewProduct(4, 2);
+            ViewBag.ListNewProductBelts = productDao.ListNewProduct(4, 3);
+            ViewBag.ListNewProductCages = productDao.ListNewProduct(4, 4);
+            ViewBag.ListNewProductAll = productDao.ListAllProduct(8);
             return View();
         }
 
-        public ActionResult About()
+        //
+        [ChildActionOnly]
+        public ActionResult MainMenu()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var model = new MenuDao().ListByGroupId(1);
+            return PartialView(model);
         }
 
-        public ActionResult Contact()
+        [ChildActionOnly]
+        public PartialViewResult HeaderCart()
         {
-            ViewBag.Message = "Your contact page.";
+            var cart = Session[CommonConstants.CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+            }
+            return PartialView(list);
+        }
 
-            return View();
+        [ChildActionOnly]
+        public PartialViewResult HeaderContact()
+        {
+            return PartialView();
         }
     }
 }

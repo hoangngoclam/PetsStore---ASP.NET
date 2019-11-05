@@ -1,0 +1,144 @@
+﻿
+@{ 
+    var session = (UserCustomerLogin)Session[PetAccessoriesOnlineShop.Common.CommonConstants.USER_SESSION];
+}
+
+<div class="container ">
+    <div class="row row-item-center">
+        <div class="col-6 col-md-2 language">
+            <!--Language - Currency... -->
+            <div class="btn-group ">
+                <button type="button" class="btn dropdown-toggle change-color btn-size-padding btn-size"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-globe mr-2"></i>Language: Eng
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menuu btn-size">
+                    <a class="dropdown-item change-color" href="#">English</a>
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item change-color" href="#">Italia</a>
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item change-color" href="#">Việt Nam</a>
+
+                </div>
+
+            </div>
+            <!-- <span class="ml-2 float-right">|</span> -->
+        </div>
+
+        <div class="col-6 col-md-2 currency">
+            <div class="currency-group">
+                <!-- inline -->
+
+                <div class="btn-group">
+                    <button type="button"
+                            class="btn dropdown-toggle change-color btn-size-padding btn-size"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-money-check-alt mr-1"></i> Currency: USD
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right btn-size">
+                        <a class=" dropdown-item btn-languge" href="#">USD</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item change-color" href="#">EUR</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item change-color" href="#">VND</a>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 col-md-4 group-button btn-size">
+            <!-- address shop... -->
+            <div>
+                <ul class="icon">
+                    <li class="button-facebook">
+                        <a href="#"><i class="fab fa-facebook-f facebook"></i></a>
+                    </li>
+                    <li class="button-twitter">
+                        <a href="#"><i class="fab fa-twitter twitter"></i></a>
+                    </li>
+                    <li class="button-youtobe">
+                        <a href="#"><i class="fab fa-youtube youtube"></i></a>
+                    </li>
+                    <li class="button-google-plus">
+                        <a href="#"><i class="fab fa-google-plus-g google"></i></a>
+                    </li>
+                    <li class="button-pinterest">
+                        <a href="#"><i class="fab fa-pinterest pinterest"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        @if (session == null)
+        {
+            <div class="col-4 col-md-2 user-info">
+                <div class="btn-group">
+                    <button type="button" class="btn dropdown-toggle change-color btn-size-padding btn-size"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <i class="fas fa-user-circle mr-1"></i> My account
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right btn-size">
+                        <a class=" dropdown-item btn-languge" href="/register">Register</a>
+                        <div class="dropdown-divider"></div>
+
+
+                        <a class="dropdown-item change-color" href="/login">Log in</a>
+                        
+
+
+                    </div>
+
+                </div>
+
+                <!-- <span class="ml-2 float-right">|</span> -->
+
+            </div>
+        }
+        else
+        {
+            <div class="col-4 col-md-2 user-info">
+                <div class="btn-group">
+                    <button type="button" class="btn dropdown-toggle change-color btn-size-padding btn-size"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <i class="fas fa-user-circle mr-1"></i> My account
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right btn-size">
+
+                        <a class="dropdown-item change-color" href="/home">Hello: @session.UserName </a>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item change-color">@Html.ActionLink("Log out","Logout","User")</div>
+                    </div>
+                </div>
+                <!-- <span class="ml-2 float-right">|</span> -->
+            </div>
+        }
+
+        <div class="col-3 col-md-2 wishlist change-color">
+
+
+            <div class="btn-group">
+                <button type="button" class="btn dropdown-toggle change-color btn-size-padding btn-size"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <i class="fab fa-gratipay mr-2"></i>Wishlist
+                </button>
+                <div class="dropdown-menu dropdown-menu-right btn-size">
+                    <a class=" dropdown-item btn-languge" href="#">Contact Us</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item change-color" href="#">My Card</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item change-color" href="#">Sign In</a>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

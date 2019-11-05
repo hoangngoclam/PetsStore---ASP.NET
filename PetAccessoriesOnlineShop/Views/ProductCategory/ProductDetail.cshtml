@@ -1,0 +1,160 @@
+﻿@model Model.EF.Product
+
+@{
+    ViewBag.Title = "Product-" + Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="wrapper-product-detail">
+    <div class="image-advertises">
+        <img class="img-responsive back_ct_img" width="100%" alt=""
+             src="https://demo.fieldthemes.com/ps-mina/home1/modules/fieldthemecustomizer/views/img/front/bg/banner_breadcrumb-1.jpg">
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-5 ">
+                <div class="product-image">
+                    <img src="@Model.Image" alt="" width="100%">
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="product-information">
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <div class="product-name">
+                                @Model.Name
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col product-star-col">
+                            <div class="product-star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="line-height">|</span>
+                            <div class="product-left">
+                                <span>(@Model.Quantity product left)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="product-content">
+                                <p>
+                                    @Model.Detail
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="product-price">
+                                <span>@(Model.Price.HasValue ? "$" + Model.Price.Value.ToString("N0") : "contact")</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="product-quantity">
+                                <div class="control-lable">QUANTITY</div>
+                                <div class="input-group">
+                                    <input class="input-quantity" type="text" value="0">
+                                    <div class="button">
+                                        <button class="btn-add">+</button>
+                                        <button class="btn-sub">-</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col button-add-love-share">
+                            <div class="button-add-to-card">
+
+                                <a href="/cart-item?productID=@Model.ID&quantity=1">
+                                    <button type="submit" class="btn-add-to-card">
+                                        Add to
+                                        card
+                                    </button>
+                                </a>
+
+                            </div>
+                            <div class="button-love">
+
+                                <a href="#">
+                                    <button type="submit" class="btn-love">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="btn-share-icon">
+
+                                <div class="button-f">
+
+                                    <a href="#">
+                                        <button type="submit" class="btn-f">
+                                            <i class="fab fa-facebook-f facebook"></i> Share
+                                        </button>
+                                    </a>
+
+                                </div>
+                                <div class="button-t">
+
+                                    <a href="#">
+                                        <button type="submit" class="btn-t">
+                                            <i class="fab fa-twitter twitter"></i> Tweet
+                                        </button>
+                                    </a>
+
+                                </div>
+                                <div class="button-g">
+
+                                    <a href="#">
+                                        <button type="submit" class="btn-g">
+                                            <i class="fab fa-google-plus-g google"></i> Google+
+                                        </button>
+                                    </a>
+
+                                </div>
+                                <div class="button-p">
+
+                                    <a href="#">
+                                        <button type="submit" class="btn-p">
+                                            <i class="fab fa-pinterest pinterest"></i> Pinterest
+                                        </button>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-5">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

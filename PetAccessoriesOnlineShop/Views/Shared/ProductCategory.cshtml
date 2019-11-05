@@ -1,0 +1,14 @@
+﻿@model List<Model.EF.CategoryProduct>
+
+<div class="row pet-category">
+    <div class="col-12"><hr></div>
+    <div class="col-12">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col" style="display:flex; justify-content:center;  align-items: center; cursor: pointer;" id="@item.IdName"><i class="fas fa-paw mr-1"></i>@item.Name</div>
+            }   
+        </div>
+    </div>
+    <div class="col-12"><hr></div>
+</div>

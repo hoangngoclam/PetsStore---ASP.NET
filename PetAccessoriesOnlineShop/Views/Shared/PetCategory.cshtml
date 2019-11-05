@@ -1,0 +1,18 @@
+﻿@model List<Model.EF.Category>
+
+<div class="row">
+    <div class="owl-carousel">
+        @foreach (var item in Model)
+        {
+            <div class="col product-tab-col">
+                <a href="/product/@item.MetaTitle-@item.ID">
+                    <div class="box-item-inner">
+                        <img src="@item.Images"
+                             alt="services">
+                        <div class="name-pet ml-1">@item.Name</div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

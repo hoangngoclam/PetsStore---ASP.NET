@@ -1,0 +1,97 @@
+﻿
+
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Model.EF.UserCustomer>
+
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{
+
+}
+
+@*@section jsFooter{
+        <script src="~/Assets/Admin/js/controller/userController.js"></script>
+    }*@
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-2"><span class="m-0 font-weight-bold text-primary">List UserCustomer</span> </div>
+            <div class="col-5">
+                @using (Html.BeginForm("Index", "User", FormMethod.Get))
+                {
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" name="searchString" class="form-control  border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+            <div class="col-5"><a href="~/Admin/User/create" class="float-right"><button class="btn btn-success">Create User</button></a></div>
+        </div>
+
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UserName</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.ID">
+                            <td>@item.ID</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Name</td>
+                            <td>@item.Address</td>
+                            <td>@item.Email</td>
+                            <td>@item.Phone</td>
+                            @* ajax *@
+                            <td><a href="#" class="btn-active-xxx" data-id="@item.ID"> @(item.Status ? "Kích hoạt" : "Khóa")</a></td>
+                            <td>
+                                <a href="/Admin/User/Edit/@item.ID">Edit</a>
+                                |
+
+                                @Ajax.ActionLink("Delete","Delete", new {@id = item.ID } ,new AjaxOptions
+                                   {
+                                       Confirm = "Are you want to delete User ?",
+                                       OnComplete = "('#row_"+@item.ID+"').remove()",
+                                       HttpMethod = "Delete"
+
+                                   })
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>PagedList</div>
+            <th> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</th>
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,89 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Model.EF.Order>
+
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{
+    Quản lý đơn hàng
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-2"><span class="m-0 font-weight-bold text-primary">List Product</span> </div>
+            <div class="col-5">
+                @using (Html.BeginForm("Index", "Order", FormMethod.Get))
+                {
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" name="searchString" class="form-control  border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name Customer</th>
+                        <th>Mobile</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>CreatedDate</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.ID">
+                            <td>@item.ID</td>
+                            <td>@item.ShipName</td>
+                            <td>@item.ShipMobile</td>
+                            <td>@item.ShipAddress</td>
+                            <td>@item.ShipEmail</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.Status</td>
+                            <td>
+                                <a href="/Admin/User/Edit/@item.ID">Edit</a>
+                                |
+
+                                @Ajax.ActionLink("Delete","Delete", new {@id = item.ID } ,new AjaxOptions
+                                    {
+                                        Confirm = "Are you want to delete User ?",
+                                        OnComplete = "('#row_"+@item.ID+"').remove()",
+                                        HttpMethod = "Delete"
+
+                                    })
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>PagedList</div>
+            <th> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</th>
+
+        </div>
+    </div>
+</div>
+
+
+
+

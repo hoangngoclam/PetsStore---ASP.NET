@@ -1,0 +1,77 @@
+﻿@model Model.EF.Category
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var ListNewProduct_PetCategory = (List<Model.EF.Product>)ViewBag.ListNewProduct_PetCategory;
+}
+
+
+<hr />
+
+<div class="special-product">
+    <div class="container">
+        <!-- product title -->
+        <div class="row pet-supplies">
+
+            <div class="col product-title">
+                <div class="line">--</div>
+                <div class="title">@Model.Name</div>
+                <div class="line">--</div>
+            </div>
+        </div>
+
+        <!-- all -->
+        <div class="row" id="all-list-product">
+            <div class="owl-carousel">
+                @foreach (var item in ListNewProduct_PetCategory)
+                {
+                    <div class="col item">
+                        <div class="card ">
+                            <a href="/product-detail/@item.MetaTitle-@item.ID">
+                                <div style="position: relative">
+                                    <div style="position: absolute" class="overlay">
+                                    </div>
+                                    <img class="card-img-top" src="@item.Image"
+                                         alt="Card image" style="width:100%">
+                                </div>
+                            </a>
+                            <div class="card-body description">
+                                <!-- description: miêu tả -->
+                                <div class="row">
+                                    <div class="col product-star">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col product-title">
+                                        @item.Name
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col product-price">
+                                        <a href="/cart-item?productID=@item.ID&quantity=1">
+                                            <button type="submit"
+                                                    class="product-price-button">
+                                                $@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "contact")
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr />
+
